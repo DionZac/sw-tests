@@ -93,7 +93,7 @@ exports.serverInit = function(args)
   var httpServer = http.createServer(server);
   var httpsServer = https.createServer(options,server);
 
-  httpServer.listen(80);
+//   httpServer.listen(80);
   httpsServer.listen(port, function(){
     console.log("startup: server started @ port " + port);
   });
