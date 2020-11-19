@@ -1,12 +1,15 @@
 var express = require('express');
+const fs = require('fs');
+var http = require('http');
+var https = require('https');
+
+var server = express();
 const options = {
     key: fs.readFileSync('./key.pem', 'utf-8'),
     cert: fs.readFileSync('./server.crt', 'utf-8')
   };
-// var server = express();
-var server = express.createServer(options)
-// const https = require('https').Server(server);
-const fs = require('fs');
+
+
 
 
 var port        = 8000
@@ -14,13 +17,13 @@ var port        = 8000
 
 
 
-fs.readFile('./index.html', function(err,html){
-    https.createServer(options, function (req, res) {
-        res.writeHead(200, {"Content-Type" : "text/html"});
-        res.write(html);
-        res.end();
-    })
-}).listen(8000);
+// fs.readFile('./index.html', function(err,html){
+//     https.createServer(options, function (req, res) {
+//         res.writeHead(200, {"Content-Type" : "text/html"});
+//         res.write(html);
+//         res.end();
+//     })
+// }).listen(8000);
 
 
 
@@ -87,9 +90,14 @@ exports.serverInit = function(args)
 
   /// set which folders are being included in 'settings.json' -- if null do not include anything ///
   server.use(express.static());
-  
-  server.listen(port, function() {
+
+  var httpServer = http.createServer(server);
+  var httpsServer = https.createServer(options,server);
+
+  httpServer.listen(80);
+  httpsServer.listen(port, function(){
     console.log("startup: server started @ port " + port);
   });
+
 
 }
