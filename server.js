@@ -4,10 +4,10 @@ var http = require('http');
 var https = require('https');
 
 var server = express();
-// const options = {
-//     key: fs.readFileSync('./key.pem', 'utf-8'),
-//     cert: fs.readFileSync('./server.crt', 'utf-8')
-//   };
+const options = {
+    key: fs.readFileSync('./key.pem', 'utf-8'),
+    cert: fs.readFileSync('./server.crt', 'utf-8')
+  };
 
 
 
