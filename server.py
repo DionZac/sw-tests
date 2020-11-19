@@ -1,11 +1,12 @@
-import SimpleHTTPServer
-import SocketServer
+import BaseHTTPServer, SimpleHTTPServer
+import ssl
 
-PORT = 8000
 
-Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
+httpd = BaseHTTPServer.HTTPServer(('localhost', 4443),
+        SimpleHTTPServer.SimpleHTTPRequestHandler)
 
-httpd = SocketServer.TCPServer(("", PORT), Handler)
+httpd.socket = ssl.wrap_socket (httpd.socket,
+        keyfile="myCA.key",
+        certfile='myCA.pem', server_side=True)
 
-print "serving at port", PORT
 httpd.serve_forever()
