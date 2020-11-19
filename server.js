@@ -4,11 +4,10 @@ var http = require('http');
 var https = require('https');
 
 var server = express();
-const options = {
-    key: fs.readFileSync('./key.pem', 'utf-8'),
-    cert: fs.readFileSync('./server.crt', 'utf-8')
-  };
-
+// const options = {
+//     key: fs.readFileSync('./key.pem', 'utf-8'),
+//     cert: fs.readFileSync('./server.crt', 'utf-8')
+//   };
 
 
 
@@ -85,11 +84,11 @@ exports.serverInit = function(args)
   server.get('/', function(req, res) { res.sendFile('./index.html'); });
   
   //// set the limit in 'settings.json' -- if null do not configure it ///
-  server.use(bodyParser.json({limit:'20mb'}));
-  server.use(bodyParser.urlencoded({limit: '20mb', extended: true}));
+//   server.use(bodyParser.json({limit:'20mb'}));
+//   server.use(bodyParser.urlencoded({limit: '20mb', extended: true}));
 
   /// set which folders are being included in 'settings.json' -- if null do not include anything ///
-  server.use(express.static());
+  server.use(express.static('./'));
 
   var httpServer = http.createServer(server);
   var httpsServer = https.createServer(options,server);
@@ -101,3 +100,6 @@ exports.serverInit = function(args)
 
 
 }
+
+
+this.serverInit();
