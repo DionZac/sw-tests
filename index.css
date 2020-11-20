@@ -1,3 +1,33 @@
 video{
     height: 200px;
+    visibility: hidden;
 }
+
+.video-container{
+    border: 10px solid gainsboro;
+    margin-left: 90px;
+}
+
+.media{
+    width: 100%;
+    display: flex;
+}
+
+.loader {
+    border-top: 16px solid blue;
+    border-right: 16px solid green;
+    border-bottom: 16px solid red;
+    border-left: 16px solid pink;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    left: 43%;
+    top: 19%;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
